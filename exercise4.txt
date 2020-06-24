@@ -1,0 +1,45 @@
+\*
+Now that we’ve warmed up it’s time to get inside a container while it’s running!
+
+Start image devopsdockeruh/exec_bash_exercise, it will start a container with clock-like features and create a log. 
+Go inside the container and use tail -f ./logs.txt to follow the logs. 
+Every 15 seconds the clock will send you a “secret message”.
+
+Submit the secret message and command(s) given as your answer.
+*/
+
+gonzalo@gonzalo-ThinkPad-E470:~/Desarrollo/DevOps - Docker$ docker run -d devopsdockeruh/exec_bash_exercise
+Unable to find image 'devopsdockeruh/exec_bash_exercise:latest' locally
+latest: Pulling from devopsdockeruh/exec_bash_exercise
+1c6172af85ee: Pull complete 
+b194b0e3c928: Pull complete 
+1f5ec00f35d5: Pull complete 
+93b1353672b6: Pull complete 
+3d7f38db3cca: Pull complete 
+21e102f9fe89: Pull complete 
+d851ffed797c: Pull complete 
+a45031e28c68: Pull complete 
+ca3c1414856f: Pull complete 
+02c74c9936fd: Pull complete 
+ddb55f8ab0a8: Pull complete 
+Digest: sha256:d38b6f6b0eed2880e25c9eb7f83f1cd016ffe3a56c9a3fec6e7bee480bf1ed0f
+Status: Downloaded newer image for devopsdockeruh/exec_bash_exercise:latest
+0f26108aaa7499e74a33fa671b4900555187378540fe76ab5ff46c9efd3ebcfc
+
+gonzalo@gonzalo-ThinkPad-E470:~/Desarrollo/DevOps - Docker$ docker exec -it 0f26 bash 
+root@0f26108aaa74:/usr/app# tail -f ./logs.txt
+Wed, 24 Jun 2020 21:06:27 GMT
+Wed, 24 Jun 2020 21:06:30 GMT
+Secret message is:
+"Docker is easy"
+Wed, 24 Jun 2020 21:06:37 GMT
+Wed, 24 Jun 2020 21:06:40 GMT
+Wed, 24 Jun 2020 21:06:43 GMT
+Wed, 24 Jun 2020 21:06:46 GMT
+Secret message is:
+"Docker is easy"
+Wed, 24 Jun 2020 21:06:52 GMT
+Wed, 24 Jun 2020 21:06:55 GMT
+^C
+root@0f26108aaa74:/usr/app# exit
+exit
