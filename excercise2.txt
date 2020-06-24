@@ -1,0 +1,47 @@
+\*
+We’ve left containers and a image that won’t be used anymore and are taking space, as docker ps -as 
+and docker images will reveal.
+
+Clean the docker daemon from all images and containers.
+Submit the output for docker ps -a and docker images
+*/
+
+gonzalo@gonzalo-ThinkPad-E470:~/Desarrollo/DevOps - Docker$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
+540ac3063c65        nginx               "/docker-entrypoint.…"   14 minutes ago      Exited (0) 8 minutes ago                       admiring_sutherland
+32eaabc68c0b        nginx               "/docker-entrypoint.…"   15 minutes ago      Exited (0) 8 minutes ago                       sleepy_herschel
+1ae7dfa79d30        nginx               "/docker-entrypoint.…"   15 minutes ago      Up 15 minutes              80/tcp              affectionate_blackwell
+
+gonzalo@gonzalo-ThinkPad-E470:~/Desarrollo/DevOps - Docker$ docker stop 1ae7
+1ae7
+
+gonzalo@gonzalo-ThinkPad-E470:~/Desarrollo/DevOps - Docker$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
+540ac3063c65        nginx               "/docker-entrypoint.…"   15 minutes ago      Exited (0) 9 minutes ago                       admiring_sutherland
+32eaabc68c0b        nginx               "/docker-entrypoint.…"   15 minutes ago      Exited (0) 9 minutes ago                       sleepy_herschel
+1ae7dfa79d30        nginx               "/docker-entrypoint.…"   15 minutes ago      Exited (0) 5 seconds ago                       affectionate_blackwell
+
+gonzalo@gonzalo-ThinkPad-E470:~/Desarrollo/DevOps - Docker$ docker rm 540 32e 1ae
+540
+32e
+1ae
+
+gonzalo@gonzalo-ThinkPad-E470:~/Desarrollo/DevOps - Docker$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+gonzalo@gonzalo-ThinkPad-E470:~/Desarrollo/DevOps - Docker$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+nginx               latest              2622e6cca7eb        2 weeks ago         132MB
+
+gonzalo@gonzalo-ThinkPad-E470:~/Desarrollo/DevOps - Docker$ docker rmi 2622
+Untagged: nginx:latest
+Untagged: nginx@sha256:21f32f6c08406306d822a0e6e8b7dc81f53f336570e852e25fbe1e3e3d0d0133
+Deleted: sha256:2622e6cca7ebbb6e310743abce3fc47335393e79171b9d76ba9d4f446ce7b163
+Deleted: sha256:e86d1b8b130bec203609b4b1d7b851bd763fa16e513e5a3fa6102ebea23260e0
+Deleted: sha256:8f9f007533543813bb1aef80b791a16e5e16c7cbbbc456a3a483d0fa7a9effcc
+Deleted: sha256:e2c0065a77fee75795cdcf9f19a72f11769332423cd52ec9e19aacfb878aec8b
+Deleted: sha256:059442698ef65fe8545e4fe9657988a10329b9c3663b368ae7ee0007a9c43949
+Deleted: sha256:13cb14c2acd34e45446a50af25cb05095a17624678dbafbcc9e26086547c1d74
+
+gonzalo@gonzalo-ThinkPad-E470:~/Desarrollo/DevOps - Docker$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
