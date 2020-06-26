@@ -1,0 +1,44 @@
+/*
+Create a Dockerfile for a new image that starts from ubuntu:16.04.
+
+Make a script file on you local machine with such content as echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;. 
+Transfer this file to an image and run it inside the container using CMD. Build the image with tag “curler”.
+
+Run command docker run [options] curler (with correct flags again, as in 1.5) and input helsinki.fi into it. 
+
+Return both Dockerfile(s) and the command you used to run the container(s)
+*/
+gonzalo@gonzalo-ThinkPad-E470:~/Desarrollo/DevOps - Docker/exercise7$ docker build -t curler .
+Sending build context to Docker daemon  4.608kB
+Step 1/6 : FROM ubuntu:16.04
+ ---> 330ae480cb85
+Step 2/6 : WORKDIR /exercise7
+ ---> Using cache
+ ---> 7bae36f1d18f
+Step 3/6 : RUN apt-get update && apt-get install -y curl
+ ---> Using cache
+ ---> e2e1dcaa6f3c
+Step 4/6 : COPY exercise7.sh .
+ ---> Using cache
+ ---> 1c676a30d765
+Step 5/6 : RUN ["chmod", "+x", "exercise7.sh"]
+ ---> Using cache
+ ---> b421c2139982
+Step 6/6 : CMD ["/bin/bash", "exercise7.sh"]
+ ---> Running in a55978a1896c
+Removing intermediate container a55978a1896c
+ ---> add1c1dadbd8
+Successfully built add1c1dadbd8
+Successfully tagged curler:latest
+
+gonzalo@gonzalo-ThinkPad-E470:~/Desarrollo/DevOps - Docker/exercise7$ docker run -it curler
+Input website:
+helsinki.fi
+Searching..
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>301 Moved Permanently</title>
+</head><body>
+<h1>Moved Permanently</h1>
+<p>The document has moved <a href="http://www.helsinki.fi/">here</a>.</p>
+</body></html>
