@@ -1,0 +1,14 @@
+/*
+In this exercise we won’t create a new Dockerfile. 
+Image devopsdockeruh/ports_exercise will start a web service in port 80. 
+Use -p flag to access the contents with your browser.
+
+Submit your used commands for this exercise.
+*/
+
+gonzalo@gonzalo-ThinkPad-E470:~/Desarrollo/DevOps - Docker$ docker run -p 8080:80 devopsdockeruh/ports_exercise
+
+> ports_exercise@1.0.0 start /usr/app
+> node index.js
+
+Listening on port 80, this means inside of the container. Use -p to map the port to a port of your local machine.
