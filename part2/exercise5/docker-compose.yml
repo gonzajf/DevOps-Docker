@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+    redis:
+        image: redis
+    backend:
+        image: backend-ex11
+        ports:
+            - 8000:8000
+        environment:
+            - REDIS=redis
+            - REDIS_PORT=6379
+        restart: unless-stopped
+    frontend:
+        image: frontend-ex10
+        ports:
+            - 5000:5000
