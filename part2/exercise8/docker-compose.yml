@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+    redis:
+        image: redis
+    database:
+        image: postgres
+        environment:
+            - POSTGRES_PASSWORD=user
+            - POSTGRES_USER=user
+    backend:
+        image: backend-ex11
+        environment:
+            - REDIS=redis
+            - REDIS_PORT=6379
+            - DB_USERNAME=user
+            - DB_PASSWORD=user
+            - DB_HOST=database
+        restart: unless-stopped
+    frontend:
+        image: frontend-ex10
+        environment:
+            - API_URL=/api/
+    nginx:
+        image: nginx
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf
+        ports:
+            - 80:80
